@@ -93,26 +93,33 @@ def vec_init_from_csv(csv1):
     docsearch = Pinecone.from_documents(docs, embeddings, index_name=index_name)
     return docsearch
 
-
+'''
+You could change the line2 section of this code based on what kind of table information you would be adding to the
+datebase. The current format is based of the tabular data I had at the time.
+Example-
+f' The stats on search algorithms {Binary Search} are - 
+{Complexity}: {.....}
+{Latency}: {......}
+'''
 def parsing_tabular_to_text(csv1):
     f_list = list()
     new_line = "\n"
 
-    with open("AMD_PDF's/JIRA Operations Review/" + csv1, mode='r') as file:
+    with open("" + csv1, mode='r') as file:
         csvFile = csv.reader(file)
         list1 = list(csvFile)
         element_length = len(list1[0])
         # print(element_length)
-    f = open("Tables/JIRA-Issue-Type-in-Ontrack-Internal.txt", "w")
+    f = open("", "w")
     for line in list1:
         if list1[1][0] == "1" or list1[0][0] == "1":
-            line2 = f'JIRA Operation Review Per Month Stats for {list1[0][1]}- {line[1]} is{new_line}{new_line.join(f"{list1[0][n + 1]}: {line[n + 1]}" for n in range(1, len(list1[0]) - 1))}{new_line}{new_line}{new_line}{new_line}'
+            line2 = f'The following stat shows information on {list1[0][1]}- {line[1]} and they are: {new_line}{new_line.join(f"{list1[0][n + 1]}: {line[n + 1]}" for n in range(1, len(list1[0]) - 1))}{new_line}{new_line}{new_line}{new_line}'
 
             if line2.find(list1[0][2] + ": " + list1[0][2]) == -1:
                 f.write(line2)
 
         else:
-            line2 = f'JIRA Operation Review Per Quater (2016 Q3 - now) for {list1[0][0]}- {line[0]} is{new_line}{new_line.join(f"{list1[0][n + 1]}: {line[n + 1]}" for n in range(len(list1[0]) - 1))}{new_line}{new_line}{new_line}{new_line}'
+            line2 = f'The following table shows information/stats on {list1[0][0]}- {line[0]} and they are: {new_line}{new_line.join(f"{list1[0][n + 1]}: {line[n + 1]}" for n in range(len(list1[0]) - 1))}{new_line}{new_line}{new_line}{new_line}'
             if line2.find(list1[0][1] + ": " + list1[0][1]) == -1:
                 f.write(line2)
 
@@ -144,7 +151,6 @@ def prompting(query):
 
     result = openai.ChatCompletion.create(
         model="gpt-35-turbo",
-        deployment_id="app-gpt-integration",
         temperature=0,
         messages=[
             {"role": "system", "content": prompt},
