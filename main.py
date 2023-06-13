@@ -25,7 +25,7 @@ pinecone.init(  # Initializing Pinecone
 )
 
 embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)  # Initializing OpenAI Embeddings model
-index = pinecone.Index("comp251-algorithms")  #Index name in Pinecone
+index = pinecone.Index("comp251-algorithms")  # Index name in Pinecone
 llm = OpenAI(temperature=0, openai_api_key=openai_api_key)  # Initializing OpenAI model
 
 app = create_app()
@@ -93,14 +93,17 @@ def vec_init_from_csv(csv1):
     docsearch = Pinecone.from_documents(docs, embeddings, index_name=index_name)
     return docsearch
 
+
 '''
 You could change the line2 section of this code based on what kind of table information you would be adding to the
-datebase. The current format is based of the tabular data I had at the time.
+database. The current format is based of the tabular data I had at the time.
 Example-
 f' The stats on search algorithms {Binary Search} are - 
 {Complexity}: {.....}
 {Latency}: {......}
 '''
+
+
 def parsing_tabular_to_text(csv1):
     f_list = list()
     new_line = "\n"
@@ -144,6 +147,7 @@ def prompting(query):
     res = index.query(xq, top_k=10, include_metadata=True)
     context = [item['metadata']['text'] for item in res['matches']]
     augmented_query = "\n\n\n\n---\n\n\n\n".join(context) + "\n\n----\n\n" + query
+
     prompt = f""" You are Q&A bot. A highly intelligent system that answers user questions based on the information
     provided by the user above for each question. If the information cannot be found in the information provided by
     the user, you truthfully say "I don't know."
@@ -159,7 +163,6 @@ def prompting(query):
     )
 
     # return result
-    print(result['choices'][0]['message']['content'])
 
     return result['choices'][0]['message']['content']
 
