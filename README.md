@@ -32,6 +32,14 @@ pip install openai
  Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Please do not add more data on the vector database until discussed.
  
 ## Visuals (Screenshots)
+### Screenshot 1 and 2
+![My Image](screenshot1.jpeg)
+![My Image](screenshot4.jpeg)
+
+### Screenshot 3 and 4
+![My Image](screenshot2.jpeg)
+![My Image](screenshot3.jpeg)
+
 
 
 
