@@ -30,6 +30,10 @@ pip install openai
 
 ## Contributing
  Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Please do not add more data on the vector database until discussed.
+ 
+## Visuals (Screenshots)
+
+
 
 
 
